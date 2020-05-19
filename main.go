@@ -21,16 +21,15 @@ func init() {
 		usage = "Sets the courses a student is offering. The defaults are General and Go"
 	)
 	//set flags
-	flag.BoolVar(&python,"python",defaultOff,"Includes python as one of your course")
-	flag.BoolVar(&python,"p",defaultOff,"Same as -python")
-
 	flag.BoolVar(&gen,"general",defaultOn,"Includes general as one of your course.\n")
 	flag.BoolVar(&gen,"gen",defaultOn,"Same as -general")
 
 	flag.BoolVar(&golang,"golang",defaultOff,"Includes golang as one of your course\n")
 	flag.BoolVar(&golang,"g",defaultOff,"Same as -golang")
-	
-	
+
+	flag.BoolVar(&python,"python",defaultOff,"Includes python as one of your course")
+	flag.BoolVar(&python,"p",defaultOff,"Same as -python")
+
 	flag.BoolVar(&fend,"frontend",defaultOff,"Includes frontend as one of your course\n")
 	flag.BoolVar(&fend,"f",defaultOff,"Same as -frontend")
 	
@@ -52,7 +51,7 @@ func generalScore() float64{
 	var task1, task2, task3, task4, task5 float64
 	fmt.Println("Enter scores for general tasks")
 	fmt.Scanf("%f %f %f %f %f", &task1, &task2, &task3, &task4, &task5)
-	fmt.Println(task1, task2, task3, task4, task5)
+	//fmt.Println(task1, task2, task3, task4, task5)
 	total := task1 + task2 + task3 + task4 + task5
 	return total
 }
@@ -61,7 +60,7 @@ func pyScore() float64 {
 	var task1, task2, task3, task4 float64
 	fmt.Println("Enter scores for python tasks")
 	fmt.Scanf("%f %f %f %f", &task1, &task2, &task3, &task4)
-	fmt.Println(task1, task2, task3, task4)
+	//fmt.Println(task1, task2, task3, task4)
 	total := task1 + task2 + task3 + task4
 	return total
 }
@@ -92,33 +91,30 @@ func main() {
 		yourScore+=total
 	}
 	
-	if golang{
+	if golang==true{
 		total := goScore()
 		excellentScore+=goGrade
 		yourScore+=total
 	}
 
-	
-	if fend{
+	if python == true{
+		total := pyScore()
+		excellentScore+=py
+		yourScore+=total
+		//fmt.Println(excellentScore,yourScore)
+	}
+
+	if fend == true{
 		total := frontendScore()
 		excellentScore+=frontend
 		yourScore+=total
 	}
 
-	if csharp{
+	if csharp == true{
 		total := cSharpScore()
 		excellentScore+=cSharp
 		yourScore+=total
 	}
-
-	
-	if python{
-		total := pyScore()
-		excellentScore+=py
-		yourScore+=total
-		fmt.Println(excellentScore,yourScore)
-	}
-
 
 	percentageScore := (yourScore/excellentScore) *100
 	if percentageScore >= (0.7*excellentScore){
