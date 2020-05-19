@@ -21,21 +21,21 @@ func init() {
 		usage = "Sets the courses a student is offering. The defaults are General and Go"
 	)
 	//set flags
-	flag.BoolVar(&python,"python",defaultOff,usage)
-	flag.BoolVar(&python,"p",defaultOff,usage+"(shorthand)")
+	flag.BoolVar(&python,"python",defaultOff,"Includes python as one of your course")
+	flag.BoolVar(&python,"p",defaultOff,"Same as -python")
 
-	flag.BoolVar(&gen,"general",defaultOn,usage)
-	flag.BoolVar(&gen,"gen",defaultOn,usage+"(shorthand)")
+	flag.BoolVar(&gen,"general",defaultOn,"Includes general as one of your course.\n")
+	flag.BoolVar(&gen,"gen",defaultOn,"Same as -general")
 
-	flag.BoolVar(&golang,"golang",defaultOff,usage)
-	flag.BoolVar(&golang,"g",defaultOff,usage+"(shorthand)")
+	flag.BoolVar(&golang,"golang",defaultOff,"Includes golang as one of your course\n")
+	flag.BoolVar(&golang,"g",defaultOff,"Same as -golang")
 	
 	
-	flag.BoolVar(&fend,"frontend",defaultOff,usage)
-	flag.BoolVar(&fend,"f",defaultOff,usage)
+	flag.BoolVar(&fend,"frontend",defaultOff,"Includes frontend as one of your course\n")
+	flag.BoolVar(&fend,"f",defaultOff,"Same as -frontend")
 	
-	flag.BoolVar(&csharp,"csharp",defaultOff,usage)
-	flag.BoolVar(&csharp,"c",defaultOff,usage)
+	flag.BoolVar(&csharp,"csharp",defaultOff,"Includes C# as one of your course\n")
+	flag.BoolVar(&csharp,"c",defaultOff,"Same as -csharp")
 	
 	flag.Parse()  // Execute command-line parsing of flags
 }
@@ -97,7 +97,7 @@ func main() {
 		excellentScore+=goGrade
 		yourScore+=total
 	}
-	flag.Value
+
 	
 	if fend{
 		total := frontendScore()
