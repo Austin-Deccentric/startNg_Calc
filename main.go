@@ -43,7 +43,7 @@ func init() {
 
 func goScore() float64{
 	var task1, task2, task3, task4 float64
-	fmt.Println("Enter scores for go task(Succesive scores should be sepearted by whitespace)")
+	fmt.Println("Enter four scores for go task(Succesive scores should be sepearted by whitespace)")
 	fmt.Scanf("%f %f %f %f ", &task1, &task2, &task3, &task4) 
 	total := task1 + task2 + task3 + task4
 	return total
@@ -102,14 +102,12 @@ func main() {
 		calcGrade(generalScore(),general)
 	}
 
-	//golang = true
 	if golang{
 		calcGrade(goScore(),goGrade)
 	}
 
 	if python{
 		calcGrade(pyScore(),py)
-		//fmt.Println(excellentScore,yourScore)
 	}
 
 	if fend{
