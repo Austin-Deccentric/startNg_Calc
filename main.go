@@ -1,14 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"flag"
+	"fmt"
 )
+
+
 
 const (
 	py = 13.0
 	goGrade = 16.0
-	general = 11.0
+	general = 12.0
 	frontend = 22.0
 	cSharp = 16.0
 )
@@ -36,21 +38,22 @@ func init() {
 	flag.BoolVar(&csharp,"csharp",defaultOff,"Includes C# as one of your course\n")
 	flag.BoolVar(&csharp,"c",defaultOff,"Same as -csharp")
 	
-	flag.Parse()  // Execute command-line parsing of flags
+	
 }
 
 func goScore() float64{
 	var task1, task2, task3, task4 float64
-	fmt.Println("Enter scores for go task")
-	fmt.Scanf("%f %f %f %f", &task1, &task2, &task3, &task4)
+	fmt.Println("Enter scores for go task(Succesive scores should be sepearted by whitespace)")
+	fmt.Scanf("%f %f %f %f ", &task1, &task2, &task3, &task4) 
 	total := task1 + task2 + task3 + task4
 	return total
+
 }
 
 func generalScore() float64{
 	var task1, task2, task3, task4, task5 float64
-	fmt.Println("Enter scores for general tasks")
-	fmt.Scanf("%f %f %f %f %f", &task1, &task2, &task3, &task4, &task5)
+	fmt.Println("Enter five scores for general tasks(Succesive scores should be sepearted by whitespace)")
+	fmt.Scanf("%f %f %f %f %f ", &task1, &task2, &task3, &task4, &task5)
 	//fmt.Println(task1, task2, task3, task4, task5)
 	total := task1 + task2 + task3 + task4 + task5
 	return total
@@ -58,8 +61,8 @@ func generalScore() float64{
 
 func pyScore() float64 {
 	var task1, task2, task3, task4 float64
-	fmt.Println("Enter scores for python tasks")
-	fmt.Scanf("%f %f %f %f", &task1, &task2, &task3, &task4)
+	fmt.Println("Enter four scores for python tasks (Succesive scores should be sepearted by whitespace)")
+	fmt.Scanf("%f %f %f %f ", &task1, &task2, &task3, &task4)
 	//fmt.Println(task1, task2, task3, task4)
 	total := task1 + task2 + task3 + task4
 	return total
@@ -67,61 +70,64 @@ func pyScore() float64 {
 
 func frontendScore() float64{
 	var task1, task2, task3, task4 float64
-	fmt.Println("Enter scores for python tasks")
-	fmt.Scanf("%f %f %f %f", &task1, &task2, &task3, &task4)
+	fmt.Println("Enter four scores for python tasks. (Succesive scores should be sepearted by whitespace)")
+	fmt.Scanf("%f %f %f %f ", &task1, &task2, &task3, &task4)
 	total := task1 + task2 + task3 + task4
 	return total
 }
 
 func cSharpScore() float64 {
 	var task1, task2, task3, task4 float64
-	fmt.Println("Enter scores for python tasks")
-	fmt.Scanf("%f %f %f %f", &task1, &task2, &task3, &task4)
+	fmt.Println("Enter four scores for python tasks. (Succesive scores should be sepearted by whitespace)")
+	fmt.Scanf("%f %f %f %f ", &task1, &task2, &task3, &task4)
 	total := task1 + task2 + task3 + task4
 	return total
 }
 
+func calcGrade(next float64, courseScore float64) {
+	total := next
+	excellentScore+=courseScore
+	yourScore+=total
+}
+var excellentScore, yourScore float64
+
+
 func main() {
-	var excellentScore, yourScore float64
 	// accumulating your scores
 	fmt.Println(python, golang, gen, fend, csharp)
-	if gen{
-		total := generalScore()
-		excellentScore+=general
-		yourScore+=total
-	}
+	flag.Parse()  // Execute command-line parsing of flags
+
 	
-	if golang==true{
-		total := goScore()
-		excellentScore+=goGrade
-		yourScore+=total
+	if gen{
+		calcGrade(generalScore(),general)
 	}
 
-	if python == true{
-		total := pyScore()
-		excellentScore+=py
-		yourScore+=total
+	//golang = true
+	if golang{
+		calcGrade(goScore(),goGrade)
+	}
+
+	if python{
+		calcGrade(pyScore(),py)
 		//fmt.Println(excellentScore,yourScore)
 	}
 
-	if fend == true{
-		total := frontendScore()
-		excellentScore+=frontend
-		yourScore+=total
+	if fend{
+		calcGrade(frontendScore(),frontend)
 	}
 
-	if csharp == true{
-		total := cSharpScore()
-		excellentScore+=cSharp
-		yourScore+=total
+	if csharp{
+		calcGrade(cSharpScore(),cSharp)	
 	}
 
 	percentageScore := (yourScore/excellentScore) *100
-	if percentageScore >= (0.7*excellentScore){
-		fmt.Printf("Hurray! You are a finalist with a score of %.2f",percentageScore)
+	fmt.Println("Your score:",yourScore)
+	fmt.Println("Excellent score:",excellentScore)
+	if yourScore >= (0.8*excellentScore){
+		fmt.Printf("Hurray! You are a finalist with a percentage score of %.2f",percentageScore)
 	}else{
-		fmt.Printf("Growth is incremental. Don't Stop!. Your grade: %.2f\n", percentageScore)
-		fmt.Printf("You needed at least: %.2f", 0.7*excellentScore)
+		fmt.Printf("Growth is incremental. Don't Stop!. Your grade: %.2f\n", yourScore)
+		fmt.Printf("You needed at least: %.2f", 0.8*excellentScore)
 	}
 	
 }
